@@ -8,7 +8,6 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
     public float walkSpeed;
     public float sprintSpeed;
-    public float wallrunSpeed;
 
     public float groundDrag;
 
@@ -17,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     public float airMultiplier;
     bool readyToJump;
     public bool doubleJump;
+
+    public bool isClimbing;
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -46,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     {
         walking,
         wallrunning,
+        climbing,
         sprinting,
         air
     }
@@ -60,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
 
         readyToJump = true;
         wallrunning = false;
+        isClimbing = false;
     }
        
     // Update is called once per frame
@@ -110,11 +113,9 @@ public class PlayerMovement : MonoBehaviour
 
     void StateHandler()
     {
-        // Mode - Wallrunning
-        if (wallrunning)
+        if (isClimbing && Input.GetKey(KeyCode.W))
         {
-            state = MovementState.wallrunning;
-            moveSpeed = wallrunSpeed;
+            state = MovementState.climbing;
         }
 
         // Mode - Sprinting
@@ -166,6 +167,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 

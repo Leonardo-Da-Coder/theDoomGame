@@ -94,6 +94,8 @@ public class GrappleHook : MonoBehaviour
 
         grappling = false;
 
+        pm.doubleJump = true;
+
         grapplingCdTimer = grapplingCd;
 
         lr.enabled = false;

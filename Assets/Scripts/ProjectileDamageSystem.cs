@@ -12,7 +12,7 @@ public class ProjectileDamageSystem : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<ShootingAi>().TakeDamage(damage);
+            other.GetComponent<BotScript>().TakeDamage(damage);
         }
     }
 

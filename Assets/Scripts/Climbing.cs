@@ -113,6 +113,10 @@ public class Climbing : MonoBehaviour
         {
             rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, -climbSpeed);
         }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, climbSpeed);
+        }
         else
         {
             rb.velocity = new Vector3(0f, 0f, 0f);

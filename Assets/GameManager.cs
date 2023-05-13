@@ -7,11 +7,17 @@ public class GameManager : MonoBehaviour
 {
     public Transform player;
 
+    public GameObject playerObj;
     public TMP_Text speed;
     public TMP_Text state;
+    public TMP_Text deathScreen;
+    public GameObject cameraFPS;
+
 
     public float speedCount;
     public string stateCount;
+
+    public bool playerDead;
     
 
     Rigidbody rb;
@@ -20,6 +26,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         rb = player.GetComponent<Rigidbody>();
+        playerDead = false;
+
+        deathScreen.enabled = false;
+        
     }
 
     // Update is called once per frame
@@ -27,7 +37,21 @@ public class GameManager : MonoBehaviour
     {
         speed.text = "Speed: " + rb.velocity.magnitude;
         state.text =  player.GetComponent<PlayerMovement>().state.ToString();
+
+        if (playerDead)
+        {
+            endGame();
+        }
     }
 
-    
+    private void endGame()
+    {
+        playerObj.GetComponent<PlayerMovement>().enabled = false;
+        playerObj.GetComponent<GrappleHook>().enabled = false;
+        playerObj.GetComponent<Dash>().enabled = false;
+
+        deathScreen.enabled = true;
+    }
+
+
 }

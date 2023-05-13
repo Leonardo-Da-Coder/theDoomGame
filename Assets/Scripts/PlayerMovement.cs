@@ -317,4 +317,20 @@ public class PlayerMovement : MonoBehaviour
         return velocityXZ + velocityY;
     }
 
+    public int playerHealth;
+
+    public GameManager gameManager;
+
+    public void TakeDamage(int damage)
+    {
+        playerHealth -= damage;
+
+        if (playerHealth <= 0 )
+        {
+            gameManager.playerDead = true;
+        }
+    }
+
+    
+
 }
